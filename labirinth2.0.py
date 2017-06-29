@@ -11,21 +11,29 @@ def main():
     """
     os.system("clear")
     level = 0
+    print_intro(level)
 
     while level < 3:
         filename = next_level(level)
         map_string = map_reading(filename)
         maze = map_convert_to_list(map_string)
-
-        player_pos = [1, 1]
-        maze[player_pos[0]][player_pos[1]] = "\033[0;33;42ms"  # Starting pos with "s" char
-        print_board(maze)
-
+        player_pos = initialization(maze)
         level = move_player(player_pos, maze, level)
 
+    win_game()
+
+
+def print_intro(level): # nézzük meg h ha előrébb rakjuk működik-e
+    intro_string = map_reading("intro.txt")
+    for i in intro_string:
+        if i == "x":
+            print("\x1b[0;31;41mx\x1b[0m", end="")
+        elif i == "L":
+            print("\x1b[2;37;40m  Labirinth  \x1b[0m")
+        else:
+            print(i, end="")
+    any_key = readchar.readchar()
     os.system("clear")
-    print("Congratulations, you won!")
-    print("Your cake is in the next castle, sorry.")
 
 
 def next_level(level):
@@ -42,6 +50,7 @@ def map_reading(filename="map0.txt"):
         with open(filename) as map_string:
             map_string = map_string.read()
             return map_string
+
     except FileNotFoundError:
         print("These are not the drones you are looking for.")
         print("We're sorry, but the maps are missing.")
@@ -62,6 +71,13 @@ def map_convert_to_list(map_string):
             if map_string[component] == "\n":
                 component += 1
     return maze
+
+
+def initialization(maze): # rakjuk később
+    player_pos = [1, 1]
+    maze[player_pos[0]][player_pos[1]] = "\033[0;33;42ms"
+    print_board(maze)
+    return player_pos
 
 
 def color_map_component(map_string, component):
@@ -106,8 +122,10 @@ def move_player(player_pos, maze, level):
                      "right": maze[player_pos[0]][player_pos[1]+1],
                      }
 
-        maze[player_pos[0]][player_pos[1]] = map_component["floor"]
         direction_input = key_input(maze)
+
+        if direction_input in ("w", "a", "s", "d"):
+            maze[player_pos[0]][player_pos[1]] = map_component["floor"]
 
         if direction_input == "q":
             quit_game()
@@ -167,10 +185,12 @@ def key_input(maze):
 
         if direction_input in ("w", "a", "s", "d", "q"):
             correct_input_given = True
+
         else:
             os.system("clear")
             print_board(maze)
             print("Please choose from these valid inputs: w, a, s, d, q - quit")
+
     return direction_input
 
 
@@ -185,6 +205,17 @@ def quit_game():
 
             if quit_input == ("q" or "Q"):
                 sys.exit()
+
+
+def win_game():
+    os.system("clear")
+    intro = map_reading("win.txt")
+    for i in intro:
+        if i == "x":
+            print("\x1b[0;32;42mx\x1b[0m", end="")
+        else:
+            print(i, end="")
+    print("\n\n\n")
 
 
 if __name__ == '__main__':

@@ -1,10 +1,10 @@
 xxxxxxxxxxxxxxx
-x  xx   x    xx
+x       x    xx
 x xx  x x x xxx
-x  xx x x   xxx
-x     xxx    xx
+x xxxux x   xxx
+x   x xxx    xx
 x xxx x      xx
-x       xxxx  x
-xxx   xx   xx x
-xx  xxx   x   o
+x   x    xxx  x
+xxx x xx xxxxxx
+xk  xxx  u    o
 xxxxxxxxxxxxxxx
