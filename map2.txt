@@ -1,0 +1,10 @@
+xxxxxxxxxxxxxxxxxxxxxxxxx
+x  xx   x x   x     xxxxx
+x xx  x x xxx x xxx   xxx
+x  xx x x     x    xx xxx
+x     xxx xxxxxxx  x   xx
+x xxx x x     x    x   xx
+x         xxx x xx xxx  x
+x x x x x  xx   xx   xx x
+x   x x   xxx  xxxxx    o
+xxxxxxxxxxxxxxxxxxxxxxxxx

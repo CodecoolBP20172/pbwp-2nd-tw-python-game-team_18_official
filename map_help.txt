@@ -1,0 +1,11 @@
+xxxxxxxxx téglalapnak kell lennie.
+x x     x
+x x     x
+x xxx x x
+x   ox  x
+x x x x x
+x       x
+x x x x x
+x x x x x
+xxxxxxxxx <- enter itt
+ <- egyel több sor kell
