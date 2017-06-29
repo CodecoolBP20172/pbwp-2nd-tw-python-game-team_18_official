@@ -4,10 +4,10 @@ import readchar
 
 
 def main():
-    """The game has 3 level, each in separate file. First it reads the file according to level,
-    then it converts it to a list, places the player to the maze (same place each level) and prints
-    to the screan. It ask keyboard input from the player untils (s)he reaches the victory location.
-    Then it repeats with the next level. After that it serves cake.
+    """The game has 3 levels, each in separate files. First it reads the file according to the level,
+    then it converts it to a list, places the player to the maze (to the same place on each level) and prints
+    to the screan. It asks keyboard input from the player untils (s)he reaches the victory location.
+    Then it repeats with the next level. At the end, the players reward will be a beautiful win picture.
     """
     os.system("clear")
     level = 0
@@ -23,13 +23,13 @@ def main():
     win_game()
 
 
-def print_intro(level): # nézzük meg h ha előrébb rakjuk működik-e
+def print_intro(level):
     intro_string = map_reading("intro.txt")
     for i in intro_string:
         if i == "x":
-            print("\x1b[0;31;41mx\x1b[0m", end="")
+            print("\033[0;31;41mx\033[0m", end="")
         elif i == "L":
-            print("\x1b[2;37;40m  Labirinth  \x1b[0m")
+            print("\033[2;37;40m  Labirinth  \033[0m")
         else:
             print(i, end="")
     any_key = readchar.readchar()
@@ -53,7 +53,7 @@ def map_reading(filename="map0.txt"):
 
     except FileNotFoundError:
         print("These are not the drones you are looking for.")
-        print("We're sorry, but the maps are missing.")
+        print("We're sorry, but the maps are somewhere in the galaxy.")
     sys.exit()
 
 
@@ -73,13 +73,6 @@ def map_convert_to_list(map_string):
     return maze
 
 
-def initialization(maze): # rakjuk később
-    player_pos = [1, 1]
-    maze[player_pos[0]][player_pos[1]] = "\033[0;33;42ms"
-    print_board(maze)
-    return player_pos
-
-
 def color_map_component(map_string, component):
     if map_string[component] == "x":
         return "\033[0;30;40mx\033[0m"
@@ -97,6 +90,13 @@ def color_map_component(map_string, component):
         return map_string[component]
 
 
+def initialization(maze):
+    player_pos = [1, 1]
+    maze[player_pos[0]][player_pos[1]] = "\033[0;33;42ms"
+    print_board(maze)
+    return player_pos
+
+
 def print_board(maze):
     for row in maze:
         print("".join(row))
@@ -110,8 +110,8 @@ def move_player(player_pos, maze, level):
                     "key": "\x1b[0;34;47mk",
                     "wall": "\x1b[0;30;40mx\x1b[0m",
                     "exit": "\x1b[0;36;46mo",
-                    "floor": "\x1b[0;37;47m ",  # It is the colored " " char
-                    "player": "\x1b[0;33;42ms",  # It is the colored "s" char
+                    "floor": "\x1b[0;37;47m ",
+                    "player": "\x1b[0;33;42ms",
                     }
     while True:
         directions = {
@@ -195,7 +195,8 @@ def key_input(maze):
 
 
 def quit_game():
-            print("Are you sure you want to leave the game?\n"
+            print(
+                  "Are you sure you want to leave the game?\n"
                   "Press 'q'' again if yes OR space if no."
                   )
             quit_input = readchar.readchar()
@@ -212,7 +213,7 @@ def win_game():
     intro = map_reading("win.txt")
     for i in intro:
         if i == "x":
-            print("\x1b[0;32;42mx\x1b[0m", end="")
+            print("\033[0;32;42mx\033[0m", end="")
         else:
             print(i, end="")
     print("\n\n\n")
